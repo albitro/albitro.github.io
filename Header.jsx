@@ -21,7 +21,7 @@ function Header({ theme, onToggleTheme, active, onNav }) {
     }}>
       <a href="#top" onClick={(e) => { e.preventDefault(); onNav("top"); }}
          style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
-        <img src="../../assets/monogram.svg" width="30" height="30" alt="" style={{ borderRadius: 8 }} />
+        <img src="./assets/monogram.svg" width="30" height="30" alt="" style={{ borderRadius: 8 }} />
         <span style={{ fontWeight: 700, fontSize: 15, color: "var(--text-heading)", letterSpacing: "-0.01em" }}>Jihyeok Ryu</span>
       </a>
 
