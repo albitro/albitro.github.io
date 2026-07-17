@@ -1,4 +1,4 @@
-// Skills — most-used languages bar + grouped tech-stack chips.
+// Skills — most-used languages bar (live from GitHub API) + grouped tech-stack chips.
 (function () {
 const { LanguageBar, Card, Tag } = window.PortfolioGitHubNativeDesignSystem_34cd29;
 
@@ -9,7 +9,86 @@ const GROUPS = [
   { title: "Infra & serving", items: ["FastAPI", "Docker", "ClickHouse", "PostgreSQL", "OPC UA", "Ubuntu"] },
 ];
 
+const GH_USER = "albitro";
+
+// The portfolio site itself is excluded — its JS/CSS/HTML is the design-system
+// bundle, not language work that represents the projects.
+const EXCLUDE_REPOS = new Set(["introduce", "albitro.github.io"]);
+
+// Shown until the live fetch resolves; also the fallback if the API is
+// unavailable (unauthenticated GitHub allows 60 req/h per IP, or offline).
+// Values mirror the real aggregate so a rate-limited visitor sees honest data.
+const FALLBACK_SEGMENTS = [
+  { label: "Python", value: 99, color: "var(--lang-py)" },
+  { label: "Makefile", value: 1, color: "#427819" },
+];
+
+// GitHub-linguist-style colors; reuse design tokens where they exist.
+const LANG_COLORS = {
+  Python: "var(--lang-py)",
+  Shell: "var(--lang-shell)",
+  JavaScript: "var(--lang-js)",
+  TypeScript: "var(--lang-ts)",
+  Go: "var(--lang-go)",
+  Rust: "var(--lang-rust)",
+  CSS: "var(--lang-css)",
+  HTML: "var(--lang-html)",
+  Swift: "var(--lang-swift)",
+  SQL: "#e38c00",
+  C: "#555555",
+  "C++": "#f34b7d",
+  Dockerfile: "#384d54",
+  Makefile: "#427819",
+  Java: "#b07219",
+};
+const OTHER_COLOR = "var(--text-subtle)";
+const MAX_SEGMENTS = 5; // top-N languages; the rest collapse into "Other"
+
+// Notebooks are Python work here — fold Jupyter bytes into Python so the bar
+// isn't dominated by .ipynb-heavy repos (ai4i_pdm, phm-agent).
+function normalizeLang(name) {
+  return name === "Jupyter Notebook" ? "Python" : name;
+}
+
+async function fetchLanguageSegments() {
+  const res = await fetch(`https://api.github.com/users/${GH_USER}/repos?per_page=100&type=owner`);
+  if (!res.ok) throw new Error(`repos ${res.status}`);
+  const repos = (await res.json()).filter((r) => !r.fork && !EXCLUDE_REPOS.has(r.name));
+
+  const byLang = {};
+  const results = await Promise.all(
+    repos.map((r) => fetch(r.languages_url).then((x) => (x.ok ? x.json() : {})).catch(() => ({})))
+  );
+  results.forEach((langs) => {
+    Object.entries(langs).forEach(([name, bytes]) => {
+      const key = normalizeLang(name);
+      byLang[key] = (byLang[key] || 0) + bytes;
+    });
+  });
+
+  const sorted = Object.entries(byLang).sort((a, b) => b[1] - a[1]);
+  if (sorted.length === 0) throw new Error("no language data");
+
+  const top = sorted.slice(0, MAX_SEGMENTS);
+  const rest = sorted.slice(MAX_SEGMENTS).reduce((s, [, v]) => s + v, 0);
+  const segments = top.map(([label, value]) => ({
+    label, value, color: LANG_COLORS[label] || OTHER_COLOR,
+  }));
+  if (rest > 0) segments.push({ label: "Other", value: rest, color: OTHER_COLOR });
+  return segments;
+}
+
 function Skills() {
+  const [segments, setSegments] = React.useState(FALLBACK_SEGMENTS);
+
+  React.useEffect(() => {
+    let alive = true;
+    fetchLanguageSegments()
+      .then((segs) => { if (alive) setSegments(segs); })
+      .catch(() => {}); // keep the fallback on rate-limit / offline
+    return () => { alive = false; };
+  }, []);
+
   return (
     <section id="skills" style={{ padding: "72px var(--gutter)", maxWidth: "var(--container-max)", margin: "0 auto" }}>
       <p style={{ fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--accent-text)", margin: "0 0 10px" }}>// Stack</p>
@@ -18,15 +97,8 @@ function Skills() {
       <div style={{ display: "grid", gridTemplateColumns: "1.1fr 1.4fr", gap: 24, alignItems: "stretch" }}>
         <Card padding={24}>
           <h3 style={{ margin: "0 0 6px", fontSize: 16, fontWeight: 600, color: "var(--text-heading)" }}>Most-used languages</h3>
-          <p style={{ margin: "0 0 20px", fontSize: 13, color: "var(--text-muted)" }}>Across all public repositories</p>
-          <LanguageBar
-            height={10}
-            showLegend
-            segments={[
-              { label: "Python", value: 90, color: "var(--lang-py)" },
-              { label: "Shell", value: 10, color: "var(--lang-shell)" },
-            ]}
-          />
+          <p style={{ margin: "0 0 20px", fontSize: 13, color: "var(--text-muted)" }}>Across my public project repositories</p>
+          <LanguageBar height={10} showLegend segments={segments} />
         </Card>
 
         <Card padding={24}>
