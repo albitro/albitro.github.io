@@ -1,0 +1,117 @@
+/* ============================================================
+   COLORS — GitHub-native (Primer-derived) dual theme
+   Base palette + semantic aliases. Brand accent = coral.
+   Light is the default on :root; dark overrides on
+   :root[data-theme="dark"]. prefers-color-scheme honored when
+   no explicit data-theme is set.
+   ============================================================ */
+
+:root {
+  /* ---- Brand: coral ---- */
+  --brand-50:  #fff1ec;
+  --brand-100: #ffe0d4;
+  --brand-200: #ffc2ac;
+  --brand-300: #ff9b80;
+  --brand-400: #f78166;   /* base / dark-mode accent */
+  --brand-500: #ef6347;   /* light-mode accent (AA on white) */
+  --brand-600: #d94e34;
+  --brand-700: #b23d28;
+
+  /* ---- Neutral scale (Primer gray) ---- */
+  --gray-0:  #ffffff;
+  --gray-50: #f6f8fa;
+  --gray-100:#eaeef2;
+  --gray-200:#d0d7de;
+  --gray-300:#afb8c1;
+  --gray-400:#8c959f;
+  --gray-500:#6e7781;
+  --gray-600:#57606a;
+  --gray-700:#424a53;
+  --gray-800:#32383f;
+  --gray-900:#24292f;
+  --gray-950:#1f2328;
+
+  /* ---- GitHub functional hues ---- */
+  --blue:    #0969da;
+  --green:   #1a7f37;
+  --purple:  #8250df;
+  --yellow:  #9a6700;
+  --red:     #cf222e;
+
+  /* ===========  SEMANTIC — LIGHT  =========== */
+  --surface-page:     var(--gray-0);
+  --surface-card:     var(--gray-0);
+  --surface-subtle:   var(--gray-50);
+  --surface-inset:    #eef1f4;
+  --surface-emphasis: var(--gray-950);
+  --surface-overlay:  var(--gray-0);
+
+  --border-default:   #d1d9e0;
+  --border-muted:     #e3e8ee;
+  --border-strong:    var(--gray-300);
+
+  --text-heading:     var(--gray-950);
+  --text-body:        var(--gray-950);
+  --text-muted:       #59636e;
+  --text-subtle:      #818b98;
+  --text-on-emphasis: var(--gray-0);
+  --text-link:        var(--blue);
+
+  --accent:           var(--brand-500);
+  --accent-hover:     var(--brand-600);
+  --accent-soft:      var(--brand-50);
+  --accent-text:      var(--brand-700);
+  --on-accent:        #ffffff;
+
+  --success:          var(--green);
+  --attention:        var(--yellow);
+  --danger:           var(--red);
+  --done:             var(--purple);
+
+  /* ---- Language dots (a sampler) ---- */
+  --lang-ts:     #3178c6;
+  --lang-js:     #f1e05a;
+  --lang-py:     #3572a5;
+  --lang-go:     #00add8;
+  --lang-rust:   #dea584;
+  --lang-css:    #563d7c;
+  --lang-html:   #e34c26;
+  --lang-swift:  #f05138;
+  --lang-shell:  #89e051;
+}
+
+/* ===========  SEMANTIC — DARK  =========== */
+:root[data-theme="dark"] {
+  --surface-page:     #0d1117;
+  --surface-card:     #151b23;
+  --surface-subtle:   #161b22;
+  --surface-inset:    #010409;
+  --surface-emphasis: #f0f6fc;
+  --surface-overlay:  #151b23;
+
+  --border-default:   #3d444d;
+  --border-muted:     #2a2f37;
+  --border-strong:    #4b535d;
+
+  --text-heading:     #f0f6fc;
+  --text-body:        #e6edf3;
+  --text-muted:       #9198a1;
+  --text-subtle:      #6e7681;
+  --text-on-emphasis: #0d1117;
+  --text-link:        #4493f8;
+
+  --accent:           var(--brand-400);
+  --accent-hover:     var(--brand-300);
+  --accent-soft:      rgba(247,129,102,0.14);
+  --accent-text:      var(--brand-300);
+  --on-accent:        #1f1410;
+
+  --success:          #3fb950;
+  --attention:        #d29922;
+  --danger:           #f85149;
+  --done:             #a371f7;
+}
+
+/* Dark mode is opt-in: set data-theme="dark" on <html> (or any ancestor
+   scope). The portfolio kit toggles this and persists it to localStorage.
+   To auto-follow the OS, mirror prefers-color-scheme onto data-theme in JS. */

@@ -1,0 +1,13 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Python (로컬 서버 실행 흔적)
+__pycache__/
+*.pyc
+
+PROGRESS.md
+README.md
