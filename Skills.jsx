@@ -1,6 +1,6 @@
 // Skills — most-used languages bar (live from GitHub API) + grouped tech-stack chips.
 (function () {
-const { LanguageBar, Card, Tag } = window.PortfolioGitHubNativeDesignSystem_34cd29;
+const { LanguageBar, Card, Tag, Octicon } = window.PortfolioGitHubNativeDesignSystem_34cd29;
 
 const GROUPS = [
   { title: "Languages", items: ["Python", "SQL"] },
@@ -8,6 +8,31 @@ const GROUPS = [
   { title: "Methods", items: ["Time-series", "Anomaly detection", "Signal processing", "DTW", "FFT / envelope"] },
   { title: "Infra & serving", items: ["FastAPI", "Docker", "ClickHouse", "PostgreSQL", "OPC UA", "Ubuntu"] },
 ];
+
+// 자격증 — 역할 관련도순(데이터/ML 우선). 자격번호는 개인 식별자라 노출 안 함.
+const CERTS = [
+  { name: "빅데이터분석기사", issuer: "한국데이터산업진흥원", date: "2024.12" },
+  { name: "SQLD", issuer: "한국데이터베이스진흥센터", date: "2026.03" },
+  { name: "일반기계기사", issuer: "한국산업인력공단", date: "2018.08" },
+  { name: "컴퓨터활용능력 1급", issuer: "대한상공회의소", date: "2021.07" },
+];
+
+function CertRow({ name, issuer, date }) {
+  return (
+    <div style={{ display: "flex", gap: 12, alignItems: "flex-start", padding: "14px 0", borderTop: "1px solid var(--border-muted)" }}>
+      <span style={{ flex: "0 0 auto", width: 26, height: 26, borderRadius: "var(--radius-full)", display: "grid", placeItems: "center", marginTop: 1, background: "var(--accent-soft)", color: "var(--accent-text)" }}>
+        <Octicon name="check" size={15} />
+      </span>
+      <div style={{ flex: "1 1 auto", minWidth: 0 }}>
+        <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
+          <span style={{ fontSize: "var(--text-sm)", fontWeight: "var(--fw-semibold)", color: "var(--text-heading)", letterSpacing: "-0.01em" }}>{name}</span>
+          <span style={{ marginLeft: "auto", flex: "0 0 auto", fontFamily: "var(--font-mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)", fontVariantNumeric: "tabular-nums" }}>{date}</span>
+        </div>
+        <p style={{ margin: "3px 0 0", fontFamily: "var(--font-mono)", fontSize: 11.5, color: "var(--text-subtle)", lineHeight: 1.45, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{issuer}</p>
+      </div>
+    </div>
+  );
+}
 
 const GH_USER = "albitro";
 
@@ -114,6 +139,16 @@ function Skills() {
           </div>
         </Card>
       </div>
+
+      <Card padding="22px 24px 8px" style={{ marginTop: 24 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--text-subtle)" }}>Certifications</span>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--text-subtle)", background: "var(--surface-subtle)", border: "1px solid var(--border-muted)", borderRadius: "var(--radius-pill)", padding: "1px 8px" }}>{CERTS.length}</span>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 40px" }}>
+          {CERTS.map((c) => <CertRow key={c.name} {...c} />)}
+        </div>
+      </Card>
     </section>
   );
 }
