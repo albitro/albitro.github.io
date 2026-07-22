@@ -9,5 +9,12 @@ desktop.ini
 __pycache__/
 *.pyc
 
-PROGRESS.md
-README.md
+# 루트 문서만 무시 (하위 폴더 README는 배포 — 예: reviews/**/README.md)
+/PROGRESS.md
+/README.md
+
+/reviews/README.md
+/reviews/TEMPLATE.md
+
+# 미배포 프로토타입/초안
+bookshelf-preview.html

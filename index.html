@@ -23,12 +23,13 @@
   <script type="text/babel" data-presets="react" src="Hero.jsx"></script>
   <script type="text/babel" data-presets="react" src="ProjectsCaseStudy.jsx"></script>
   <script type="text/babel" data-presets="react" src="LearningReal.jsx"></script>
+  <script type="text/babel" data-presets="react" src="Bookshelf.jsx"></script>
   <script type="text/babel" data-presets="react" src="About.jsx"></script>
   <script type="text/babel" data-presets="react" src="Skills.jsx"></script>
   <script type="text/babel" data-presets="react" src="Footer.jsx"></script>
 
   <script type="text/babel" data-presets="react">
-    const SECTIONS = ["projects", "learning", "about", "skills"];
+    const SECTIONS = ["projects", "learning", "reading", "about", "skills"];
 
     function App() {
       const [theme, setTheme] = React.useState(() => localStorage.getItem("portfolio-theme") || "light");
@@ -59,6 +60,7 @@
             <Hero onNav={nav} />
             <ProjectsCaseStudy />
             <LearningReal />
+            <Bookshelf />
             <About />
             <Skills />
           </main>

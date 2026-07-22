@@ -6,6 +6,7 @@ function Header({ theme, onToggleTheme, active, onNav }) {
   const links = [
     { id: "projects", label: "Projects" },
     { id: "learning", label: "Learning" },
+    { id: "reading", label: "Reading" },
     { id: "about", label: "About" },
     { id: "skills", label: "Skills" },
   ];
