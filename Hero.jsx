@@ -23,16 +23,17 @@ function Hero({ onNav }) {
           margin: "0 0 18px", fontSize: "var(--text-display)", fontWeight: 800,
           lineHeight: 1.05, letterSpacing: "-0.025em", color: "var(--text-heading)",
         }}>
-          I find the signal<br />before the failure.
+          Every failure<br />whispers first.
         </h1>
 
         <p style={{
           margin: "0 0 30px", maxWidth: "52ch", fontSize: 18, lineHeight: 1.6,
           color: "var(--text-muted)",
         }}>
-          산업 현장의 시계열 센서 데이터를 다루는 ML 엔지니어입니다. 지난 5년간
-          전기로 조업부터 항공 비행 기록까지 흩어진 신호를, 현장에서 실제로 돌아가는
-          이상탐지와 예측으로 바꿔왔습니다. 수집, 저장, 피처, 서빙까지 한 묶음으로.
+          산업 현장의 시계열 데이터에서 그 속삭임을 먼저 읽어내는 ML
+          엔지니어입니다. Python과 시계열 모델링을 기반으로 수집부터 현장
+          적용까지 하나로 잇고, 도메인 전문가와의 협업으로 데이터만으로는
+          보이지 않는 맥락을 채워가는 것을 목표로 합니다.
         </p>
 
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 14 }}>
@@ -75,7 +76,7 @@ function Hero({ onNav }) {
 {"$ "}cat stack.txt{"\n"}
 <span style={{ color: "var(--lang-py)" }}>python</span>{" pytorch fastapi clickhouse docker\n"}
 {"$ "}git log --oneline -1{"\n"}
-<span style={{ color: "var(--success)" }}>a1b9f02</span>{" feat: ship anomaly detection to the floor"}</pre>
+<span style={{ color: "var(--success)" }}>a1b9f02</span>{" feat: build anomaly detection pipeline"}</pre>
       </div>
     </section>
   );

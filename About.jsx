@@ -53,13 +53,13 @@ function About() {
           <p style={{ fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--accent-text)", margin: "0 0 10px" }}>// About</p>
           <h2 style={{ margin: "0 0 22px", fontSize: 32, fontWeight: 700, letterSpacing: "-0.02em", color: "var(--text-heading)" }}>About me</h2>
           <p style={{ margin: "0 0 16px", fontSize: 17, lineHeight: 1.65, color: "var(--text-body)" }}>
-            전공은 기계공학인데, 일하다 보니 데이터랑 모델 쪽이 더 재밌어서 ML
-            엔지니어가 됐습니다. 5년 동안 일한 산업 도메인은 계속 바뀌었지만 하는
-            일은 비슷했어요. 시계열 데이터에서 정상과 비정상을 가르고, 그게 현장에서
-            실제로 돌아가게 만드는 일이요.
+            저는 시작한 걸 현장까지 끌고 가는 편입니다. 수집이 안 되면 수집기를
+            만들고, 저장이 문제면 DB를 다시 짜고, 모델이 나오면 그게 실제로 돌아갈
+            때까지 붙잡았어요. 기계공학에서 데이터로 넘어온 뒤로, 현장이 바뀌어도
+            그렇게 처음부터 끝까지 손대는 방식은 변하지 않았습니다.
           </p>
           <p style={{ margin: "0 0 26px", fontSize: 17, lineHeight: 1.65, color: "var(--text-muted)" }}>
-            모르는 게 나오면 일단 직접 해봐야 직성이 풀리는 편입니다. 회사에서 쓴
+            모르는 게 나오면 일단 직접 해봐야 직성이 풀리는 편입니다. 회사에서 적용해 본
             이상탐지 모델도 논문을 다시 읽어가며 코드를 뜯어고쳤고, 궁금한 모델은
             따로 공개 데이터로 처음부터 구현해 봤어요. 부족한 기초는 야간 대학원이랑
             PHM 강좌로 메우는 중이고, 새로 공부한 건 노트로 정리해서 깃허브에 올려둡니다.
